@@ -1,0 +1,180 @@
+<html>
+    <head>
+        <title>A little demonstration</title>
+        <style>
+            table, th, td {
+                border: 1px solid;
+                border-collapse: collapse;
+            }
+            td {
+                width: 50px;
+            }
+
+            th {
+                height: 90px;
+            }
+        </style>
+        <script>
+            x = 2
+            y = 2
+            xmax = 4
+            ymax = 4
+            
+            function erase() {
+                id = document.getElementById("maze")
+                maze.rows[y].cells[x].style.background="white"
+            }
+
+            function draw() {
+                id = document.getElementById("maze")
+                maze.rows[y].cells[x].style.background="green"
+            }
+            function up() {
+                if (y == 0) return;
+                erase()
+                y--;
+                draw()
+            }
+
+            function left() {
+                if (x == 0) return;
+                erase()
+                x--;
+                draw()               
+            }
+
+            function right() {
+                if (x == xmax) return;
+                erase()
+                x++;
+                draw()
+            }
+
+            function down() {
+                if (y == ymax) return;
+                erase()
+                y++;
+                draw()
+                
+            }
+            document.addEventListener("keydown", function(event) {
+                switch (event.keyCode) {
+                    case 37: left(); break;
+                    case 38: up(); break;
+                    case 39: right(); break;
+                    case 40: down(); break;
+                }
+                console.log(event.keyCode)
+            });
+        </script>
+    </head>
+    <body>
+        <h1>maze</h1>
+        <table id="maze">
+            <tr>
+                <td id="0_0">
+                    &nbsp;
+                </td>
+                <td id="1_0">
+                    &nbsp;
+                </td>
+                <td id="2_0">
+                    &nbsp;
+                </td>
+                <td id="3_0">
+                    &nbsp;
+                </td>
+                <td id="4_0">
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td id="0_1">
+                    &nbsp;
+                </td>
+                <td id="1_1">
+                    &nbsp;
+                </td>
+                <td id="2_1">
+                    &nbsp;
+                </td>
+                <td id="3_1">
+                    &nbsp;
+                </td>
+                <td id="4_1">
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td id="0_2">
+                    &nbsp;
+                </td>
+                <td id="1_2">
+                    &nbsp;
+                </td>
+                <td id="2_2" style="background: green;">
+                    &nbsp;
+                </td>
+                <td id="3_2">
+                    &nbsp;
+                </td>
+                <td id="4_2">
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td id="0_3">
+                    &nbsp;
+                </td>
+                <td id="1_3">
+                    &nbsp;
+                </td>
+                <td id="2_3">
+                    &nbsp;
+                </td>
+                <td id="3_3">
+                    &nbsp;
+                </td>
+                <td id="4_3">
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td id="0_4">
+                    &nbsp;
+                </td>
+                <td id="1_4">
+                    &nbsp;
+                </td>
+                <td id="2_4">
+                    &nbsp;
+                </td>
+                <td id="3_4">
+                    &nbsp;
+                </td>
+                <td id="4_4">
+                    &nbsp;
+                </td>
+            </tr>
+        </table>
+    </body>
+    <hr>
+    <h1>Controls</h1>
+    <table>
+        <tr>
+            <td></td>
+            <td><button style="width: 100%;" onClick="javascript:up()">UP</button></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><button onClick="javascript:left()">LEFT</button></td>
+            <td></td>
+            <td><button onClick="javascript:right()">RIGHT</button></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button onClick="javascript:down()">DOWN</button></td>
+            <td></td>
+        </tr>
+    </table>
+</html>

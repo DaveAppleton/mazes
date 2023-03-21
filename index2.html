@@ -1,0 +1,193 @@
+<html>
+    <head>
+        <title>A little demonstration</title>
+        <style>
+            table, th, td {
+                border: 1px solid;
+                border-collapse: collapse;
+            }
+            td {
+                width: 50px;
+            }
+
+            tr.a {
+                height: 60px;
+            }
+        </style>
+        <script>
+            x = 2
+            y = 2
+            xmax = 4
+            ymax = 4
+            
+            function erase() {
+                id = document.getElementById("maze")
+                maze.rows[y].cells[x].innerHTML="&nbsp;"
+            }
+
+            function draw() {
+                id = document.getElementById("maze")
+                maze.rows[y].cells[x].innerHTML="<img src=\"favicon.ico\">"
+            }
+
+            function empty(yy,xx){
+                id = document.getElementById("maze")
+                ih = maze.rows[yy].cells[xx].innerHTML
+                console.log("["+ih.trim()+"]")
+                return (ih.trim() == "&nbsp;")
+            }
+            function up() {
+                if (y == 0) return;
+                if (!empty(y-1,x)) return;
+                erase()
+                y--;
+                draw()
+            }
+
+            function left() {
+                if (x == 0) return;
+                if (!empty(y,x-1)) return;
+                erase()
+                x--;
+                draw()               
+            }
+
+            function right() {
+                if (x == xmax) return;
+                if (!empty(y,x+1)) return;
+                erase()
+                x++;
+                draw()
+            }
+
+            function down() {
+                if (y == ymax) return;
+                if (!empty(y+1,x)) return;
+                erase()
+                y++;
+                draw()
+                
+            }
+            document.addEventListener("keydown", function(event) {
+                switch (event.keyCode) {
+                    case 37: left(); break;
+                    case 38: up(); break;
+                    case 39: right(); break;
+                    case 40: down(); break;
+                }
+                console.log(event.keyCode)
+            });
+        </script>
+    </head>
+    <body>
+        <h1>maze</h1>
+        <table id="maze">
+            <tr class="a">
+                <td id="0_0">
+                    &nbsp;
+                </td>
+                <td id="1_0">
+                    &nbsp;
+                </td>
+                <td id="2_0">
+                    &nbsp;
+                </td>
+                <td id="3_0">
+                    &nbsp;
+                </td>
+                <td id="4_0">
+                    &nbsp;
+                </td>
+            </tr>
+            <tr class="a">
+                <td id="0_1">
+                    &nbsp;
+                </td>
+                <td id="1_1">
+                    &nbsp;
+                </td>
+                <td id="2_1">
+                    <img src="rock.png">
+                </td>
+                <td id="3_1">
+                    &nbsp;
+                </td>
+                <td id="4_1">
+                    &nbsp;
+                </td>
+            </tr>
+            <tr class="a">
+                <td id="0_2">
+                    <img src="rock.png">
+                </td>
+                <td id="1_2">
+                    &nbsp;
+                </td>
+                <td id="2_2">
+                    <img src="favicon.ico">
+                </td>
+                <td id="3_2">
+                    &nbsp;
+                </td>
+                <td id="4_2">
+                    <img src="rock.png">
+                </td>
+            </tr>
+            <tr class="a">
+                <td id="0_3">
+                    &nbsp;
+                </td>
+                <td id="1_3">
+                    &nbsp;
+                </td>
+                <td id="2_3">
+                    <img src="rock.png">
+                </td>
+                <td id="3_3">
+                    <img src="rock.png">
+                </td>
+                <td id="4_3">
+                    &nbsp;
+                </td>
+            </tr>
+            <tr class="a">
+                <td id="0_4">
+                    &nbsp;
+                </td>
+                <td id="1_4">
+                    &nbsp;
+                </td>
+                <td id="2_4">
+                    &nbsp;
+                </td>
+                <td id="3_4">
+                    &nbsp;
+                </td>
+                <td id="4_4">
+                    &nbsp;
+                </td>
+            </tr>
+        </table>
+    
+        <hr>
+        <h1>Controls</h1>
+        <table>
+            <tr>
+                <td></td>
+                <td><button style="width: 100%;" onClick="javascript:up()">UP</button></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><button onClick="javascript:left()">LEFT</button></td>
+                <td></td>
+                <td><button onClick="javascript:right()">RIGHT</button></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button onClick="javascript:down()">DOWN</button></td>
+                <td></td>
+            </tr>
+        </table>
+        <a href="index0.html">version using backgrounds</a>
+    </body>
+</html>
