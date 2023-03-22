@@ -1,0 +1,167 @@
+<html>
+    <head>
+        <title>A little demonstration</title>
+        <style>
+            table, th, td {
+                border: 1px solid;
+                border-collapse: collapse;
+            }
+            td {
+                width: 50px;
+            }
+
+            tr.a {
+                height: 60px;
+            }
+        </style>
+        <script>
+            let x
+            let y
+            let xmax
+            let ymax
+            
+            function erase() {
+                id = document.getElementById("maze")
+                maze.rows[y].cells[x].innerHTML="&nbsp;"
+            }
+
+            function draw() {
+                id = document.getElementById("maze")
+                maze.rows[y].cells[x].innerHTML="<img src=\"favicon.ico\">"
+            }
+
+            function empty(yy,xx){
+                id = document.getElementById("maze")
+                ih = maze.rows[yy].cells[xx].innerHTML
+                console.log("["+ih.trim()+"]")
+                if (ih.trim() == "<img src=\"eggs.png\">") {
+                    alert("Finally I get my EGGS")
+                    for (let yp = 0; yp <= ymax; yp++) {
+                        for (let xp = 0; xp <= xmax; xp++) {
+                            maze.rows[yp].cells[xp].style.background="#FFD700"
+                        }
+                    }
+                    return true;
+                }
+                return (ih.trim() == "&nbsp;")
+            }
+            function up() {
+                if (y == 0) return;
+                if (!empty(y-1,x)) return;
+                erase()
+                y--;
+                draw()
+            }
+
+            function left() {
+                if (x == 0) return;
+                if (!empty(y,x-1)) return;
+                erase()
+                x--;
+                draw()               
+            }
+
+            function right() {
+                if (x == xmax) return;
+                if (!empty(y,x+1)) return;
+                erase()
+                x++;
+                draw()
+            }
+
+            function down() {
+                if (y == ymax) return;
+                if (!empty(y+1,x)) return;
+                erase()
+                y++;
+                draw()
+                
+            }
+            document.addEventListener("keydown", function(event) {
+                switch (event.keyCode) {
+                    case 37: left(); break;
+                    case 38: up(); break;
+                    case 39: right(); break;
+                    case 40: down(); break;
+                }
+                console.log(event.keyCode)
+            });
+            function populateTable(table, rows, cells, content) {
+                x = Math.floor(cells / 2)
+                y = Math.floor(rows/2)
+                xmax = cells - 1
+                ymax = rows - 1
+                var is_func = (typeof content === 'function');
+                if (!table) table = document.createElement('table');
+                table.id = "maze"
+                for (var i = 0; i < rows; ++i) {
+                    var row = document.createElement('tr');
+                    row.style = "height: 60px;"
+                    for (var j = 0; j < cells; ++j) {
+                        row.appendChild(document.createElement('td'));
+                        var text = ""
+                        row.cells[j].appendChild(document.createTextNode(text));
+                        row.cells[j].innerHTML="&nbsp;"
+                    }
+                    table.appendChild(row);
+                }
+                return table;
+            }
+
+        </script>
+    </head>
+    <body>
+        <h1>maze</h1>
+        <p>This was created for my son who told me he wanted to learn html, CSS and javascript and promised to cook me eggs benadict</p>
+        <p>sadly we had time for neither</p>
+        <div id="tablearea">
+
+        </div>
+
+    
+        <hr>
+        <h1>Controls</h1>
+        <table>
+            <tr>
+                <td></td>
+                <td><button style="width: 100%;" onClick="javascript:up()">UP</button></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><button onClick="javascript:left()">LEFT</button></td>
+                <td></td>
+                <td><button onClick="javascript:right()">RIGHT</button></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button onClick="javascript:down()">DOWN</button></td>
+                <td></td>
+            </tr>
+        </table>
+        <a href="index0.html">version using backgrounds</a>
+        <script>
+            document.getElementById('tablearea')
+                .appendChild(populateTable(null, 15, 15, function(t, r, c) {
+                                return '';
+                })
+            );
+            m = document.getElementById("maze")
+            
+            maze.rows[7].cells[7].innerHTML="<img src=\"favicon.ico\">"
+            numRox = Math.floor(Math.random() * 60)
+            for (let j = 0; j < numRox; j++) {
+                let xp = Math.floor(Math.random() * 15)
+                let yp = Math.floor(Math.random() * 15)
+                if ((xp != 7) || (yp != 7)) {
+                    maze.rows[yp].cells[xp].innerHTML="<img src=\"rock.png\">"
+                }
+            }
+            let xp = Math.floor(Math.random() * 15)
+            let yp = Math.floor(Math.random() * 15)
+            if ((xp != 7) || (yp != 7)) {
+                    maze.rows[yp].cells[xp].innerHTML="<img src=\"eggs.png\">"
+                }
+
+        </script>
+    </body>
+</html>
